@@ -3,17 +3,15 @@ import {useState} from 'react';
 
 function App() {
   const [buttonColor, setButtonColor] = useState('red');
-  const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [buttonIsDisabled, setButtonIsDisabled] = useState(checkboxChecked);
+  const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
   const newButtonColor = buttonColor === 'red' ? 'blue' : 'red';
 
   const changeButtonColorHandler = () => {
     setButtonColor(newButtonColor);
   }
 
-  const checkboxClickHandler = () => {
-    setButtonIsDisabled((prevDisabled) => !prevDisabled)
-    setCheckboxChecked((prevCheckboxChecked) => !prevCheckboxChecked);
+  const checkboxClickHandler = (event) => {
+    setButtonIsDisabled(event.target.checked);
   }
 
   return (
@@ -21,15 +19,20 @@ function App() {
       <h1>Color button app</h1>
       <button
         className="ColorButton"
-        style={{ backgroundColor: buttonColor, }}
+        style={{ backgroundColor: !buttonIsDisabled ? buttonColor : 'gray', }}
         onClick={changeButtonColorHandler}
         disabled={buttonIsDisabled}
       >
         Change to {newButtonColor}
       </button>
       <label className="Checkbox">
-        <input checked={checkboxChecked} onChange={checkboxClickHandler} type="checkbox"/>
-        {!checkboxChecked ? 'Disable' : 'Enable'} button
+        <input
+          onChange={checkboxClickHandler}
+          type="checkbox"
+          defaultChecked={buttonIsDisabled}
+          aria-checked={buttonIsDisabled}
+        />
+          Disable button
       </label>
     </div>
   );

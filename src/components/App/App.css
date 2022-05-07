@@ -18,12 +18,6 @@
   cursor: pointer;
 }
 
-.ColorButton:disabled {
-  filter: grayscale(100%);
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .Checkbox {
   padding: 10px 0;
 }
