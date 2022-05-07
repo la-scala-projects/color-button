@@ -10,8 +10,10 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="App">
+      <h1>Color button app</h1>
       <button
+        className="ColorButton"
         style={{ backgroundColor: buttonColor, }}
         onClick={changeButtonColorHandler}
       >
